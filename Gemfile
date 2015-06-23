@@ -11,22 +11,22 @@ gem 'jquery-rails'
 gem 'pg'
 
 group :development do
-  gem 'thin'
-  gem "better_errors"
-  gem "binding_of_caller"
+	gem 'thin'
+	gem "better_errors"
+	gem "binding_of_caller"
 end
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+	gem 'pry'
+	gem 'pry-nav'
+	gem 'rspec-rails', '2.99'
 end
 
 group :test do
-  gem 'database_cleaner', '1.2.0'
+	gem 'database_cleaner', '1.2.0'
 end
 
 group :production do
-  gem 'rails_12factor'
+	gem 'rails_12factor'
 end
 
