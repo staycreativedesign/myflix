@@ -20,7 +20,7 @@ describe Video do
 
 	it "does not save without title" do
 		video = Video.create(description: "This is a description")
-		expect(Video.count).to eq(0)
+		expect(Video.count).to eq(0 )
 	end
 
 end
