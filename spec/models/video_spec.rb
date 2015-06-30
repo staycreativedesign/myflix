@@ -1,26 +1,30 @@
 require 'spec_helper'
 
 describe Video do
-	it "saves itself" do
-		video = Video.new(title: "monk", description: "a great video!")
-		video.save
-		expect(Video.first).to eq(video)
-	end
+	it { should belong_to(:category)}
+	it { should validate_presence_of(:title) }
+	it { should validate_presence_of(:description) }
 
-	it "belongs to category" do
-		dramas = Category.create(name: "dramas")
-		monk = Video.create(title: "monk", description: " a great video!", category: dramas)
-		expect(monk.category).to eq(dramas)
-	end
+	describe "search_by_title" do
+		it "returns an empty array if there is no match" do
+			futurama = Video.create(title: "Futurama", description: "Space video")
+			back_to_future = Video.create(title: "Back to the Future", description: "Space Travel")
+			expect(Video.search_by_title("hello")).to eq([])
+		end
+		it "returns an array of one video for an exact match" do
 
-	it "does not save without description" do
-		video = Video.create(title: "Hey Now")
-		expect(Video.count).to eq(0)
+			futurama = Video.create(title: "Futurama", description: "Space video")
+			expect(Video.search_by_title("Futurama")).to eq([futurama])
+		
+		end
+		it "returns an array of one video for a partial match" do
+			futurama = Video.create(title: "Futurama", description: "Space video")
+			expect(Video.search_by_title("Fut")).to eq([futurama])
+		end
+		it "returns an array of all matches ordered by created_at" do
+			futurama = Video.create(title: "Futurama", description: "Space video")
+			back_to_future = Video.create(title: "Back to the Future", description: "Space Travel", created_at: 1.day.ago)
+			expect(Video.search_by_title("Fut")).to eq([back_to_future, futurama])
+		end
 	end
-
-	it "does not save without title" do
-		video = Video.create(description: "This is a description")
-		expect(Video.count).to eq(0 )
-	end
-
 end
