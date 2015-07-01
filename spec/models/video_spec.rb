@@ -24,7 +24,11 @@ describe Video do
 		it "returns an array of all matches ordered by created_at" do
 			futurama = Video.create(title: "Futurama", description: "Space video")
 			back_to_future = Video.create(title: "Back to the Future", description: "Space Travel", created_at: 1.day.ago)
-			expect(Video.search_by_title("Fut")).to eq([back_to_future, futurama])
+			expect(Video.search_by_title("Fut")).to eq([futurama, back_to_future])
+		end
+
+		it "returns a empty array for a search with an empty string" do
+
 		end
 	end
 end
