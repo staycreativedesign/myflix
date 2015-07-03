@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 	end
 	def create
 		@user = User.create(user_params)
-		binding.pry
 		if @user.save
 			redirect_to sign_in_path
 		else
