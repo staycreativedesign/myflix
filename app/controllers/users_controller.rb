@@ -4,19 +4,19 @@ class UsersController < ApplicationController
 		@user = User.new		
 	end
 	def create
-		@user = User.create(params[user_params])
+		@user = User.create(user_params)
 		binding.pry
 		if @user.save
-			redirect_to root_path
+			redirect_to sign_in_path
 		else
-			redirect_to register_path
+			render :new
 		end
 	end
 
 private
 	
 	def user_params
-		params.require(:user).permit(:username, :email, :password)
+		params.require(:user).permit(:full_name, :email, :password)
 	end
 
 end
