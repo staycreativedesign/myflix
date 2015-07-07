@@ -23,7 +23,7 @@ describe Video do
 		end
 		
 		it "returns an array of all matches ordered by created_at" do
-			expect(Video.search_by_title("Fut")).to eq([video_1, video_2])
+			expect(Video.search_by_title("Fut")).to eq([video_2, video_1])
 		end
 
 		it "returns a empty array for a search with an empty string" do
