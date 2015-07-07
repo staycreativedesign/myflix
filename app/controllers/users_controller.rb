@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 		if @user.save
 			redirect_to root_path
 		else
+			flash[:error] = 'You email or password does not match'
 			render :new
 		end
 	end
