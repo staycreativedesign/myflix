@@ -17,7 +17,7 @@ describe UsersController do
 		context "with valid input" do
 			before {post :create, user: Fabricate.attributes_for(:user)}
 			it "sets the @user record when input is valid" do 
-				expect(User.count).to eql(1)
+				expect(User.count).to eq(1)
 			end
 			it "redirects to the root path when the input is valid" do
 				expect(response).to redirect_to root_path
