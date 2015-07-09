@@ -6,7 +6,8 @@ Myflix::Application.routes.draw do
   get '/home', to: 'categories#index'
   resources :users, only: [:new, :create]
   resources :videos, only: [:index, :show] do
-  	collection do
+    resources :reviews
+    collection do
   		get 'search', to: 'videos#search'
   	end
   end

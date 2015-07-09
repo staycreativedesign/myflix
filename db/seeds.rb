@@ -17,7 +17,7 @@
               )
 
 
-  Video.create( title: 'South Park new', 
+  southpark = Video.create( title: 'South Park new', 
                 description: "South Park is an American adult animated sitcom created by Trey Parker and Matt Stone for the Comedy Central television network. Intended for mature audiences, the show has become infamous for its crude language and dark, surreal humor that satirizes a wide range of topics. The ongoing narrative revolves around four boys—Stan Marsh, Kyle Broflovski, Eric Cartman, and Kenny McCormick—and their bizarre adventures in and around the titular Colorado town. Much like The Simpsons, South Park utilizes a very large ensemble cast of recurring characters.",
                 small_cover_url: "tmp/south_park.jpg",
                 large_cover_url: "tmp/monk_large.jpg",
@@ -42,3 +42,7 @@
                 large_cover_url: "tmp/monk_large.jpg",
                 category_id: 2
               )
+
+  gus = User.create(full_name: "Gus", password: "red500", email: "pares101@aol.com")
+
+  Review.create(user: gus, video: southpark, rating: '5', description: "This is the description" )
