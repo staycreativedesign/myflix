@@ -4,11 +4,13 @@ describe Video do
 	it { should belong_to(:category)}
 	it { should validate_presence_of(:title) }
 	it { should validate_presence_of(:description) }
-	
-	describe "search_by_title" do
-		let(:video_1) { Fabricate(:video, title: 'Futurama')}
-		let(:video_2) { Fabricate(:video, title: 'Back to the Future', created_at: 1.day.ago )}
+	it { should delegate_method(:name).to(:category).with_prefix(:category)}	
 
+	let(:video_1) { Fabricate(:video, title: 'Futurama')}
+	let(:video_2) { Fabricate(:video, title: 'Back to the Future', created_at: 1.day.ago )}
+
+	describe "search_by_title" do
+		
 		it "returns an empty array if there is no match" do
 			expect(Video.search_by_title(Faker::Lorem.word)).to eq([])
 		end

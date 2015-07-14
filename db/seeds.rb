@@ -9,7 +9,7 @@
   Category.create(name: "TV Shows")
   Category.create(name: "Other Shows")
 
-  Video.create( title: 'Futurama new', 
+  futurama = Video.create( title: 'Futurama new', 
                 description: "Futurama is an American adult animated science fiction sitcom created by Matt Groening for the Fox Broadcasting Company. The series follows the adventures of a late-20th-century New York City pizza delivery boy, Philip J. Fry, who, after being unwittingly cryogenically frozen for one thousand years, finds employment at Planet Express, an interplanetary delivery company in the retro-futuristic 31st century. The series was envisioned by Groening in the late 1990s while working on The Simpsons, later bringing Cohen aboard to develop storylines and characters to pitch the show to Fox.",
                 small_cover_url: "tmp/futurama.jpg",
                 large_cover_url: "tmp/monk_large.jpg",
@@ -46,3 +46,5 @@
   gus = User.create(full_name: "Gus", password: "red500", email: "pares101@aol.com")
 
   Review.create(user: gus, video: southpark, rating: '5', description: "This is the description" )
+  QueueItem.create(user: gus, video: southpark, position: 1)
+  QueueItem.create(user: gus, video: futurama, position: 2)
