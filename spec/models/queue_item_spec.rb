@@ -7,11 +7,11 @@ describe QueueItem do
 	it { should delegate_method(:title).to(:video).with_prefix(:video) }
 	it { should delegate_method(:category_name).to(:video) }
 
-	let(:alice) 			{ Fabricate(:video) }
-	let(:gus)					{ Fabricate(:user)	}
-	let(:queue_item)	{ Fabricate(:queue_item, user: gus, video: alice) }
+	let(:alice)      { Fabricate(:video) }
+	let(:gus)        { Fabricate(:user) }
+	let(:queue_item) { Fabricate(:queue_item, user: gus, video: alice) }
 
- 	describe "#rating" do
+	describe "#rating" do
 		it "returns a rating from the review if review is present" do
 			review = Fabricate(:review, user: gus, video: alice, rating: "4")
 			expect(queue_item.rating).to eq("4")
