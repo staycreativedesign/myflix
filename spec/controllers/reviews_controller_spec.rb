@@ -41,7 +41,7 @@ describe ReviewsController do
           expect(flash[:error]).not_to be_blank
         end
         it "renders video/show template" do
-          expect(response).to redirect_to "videos/show"
+          expect(response).to render_template "videos/show"
         end
       end 
     end
