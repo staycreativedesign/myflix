@@ -3,6 +3,6 @@ class Review < ActiveRecord::Base
 	belongs_to :user
 	validates :description, presence: true
 
-	delegate :full_name, :to => :user, :prefix => :user
+	delegate :full_name, :to => :user, :prefix => :user, :allow_nil => true
 
 end
