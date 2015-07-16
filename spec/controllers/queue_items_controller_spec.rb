@@ -37,11 +37,29 @@ describe QueueItemsController do
       end
 
       it "does not put video in queue if already in queue" do
-        post :create, video_id: video1.id
         expect(QueueItem.count).to eq(1)
       end        
     end
+
+    describe "DELETE destroy" do
+      before { post :create, video_id: video1.id }
+      before { delete :destroy, id: QueueItem.first.id }
+      
+      it "deletes the selected queue_item" do
+        expect(QueueItem.count).to eq(0)
+      end
+
+      it "redirects to my_queue_path" do
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "shows a notice" do
+        expect(flash[:notice]).to be_present
+      end
+
+    end
   end
+
   context "user is not logged in" do
     it "redirects to sign_in_path" do
       get :index
