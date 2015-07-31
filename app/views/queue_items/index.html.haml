@@ -4,6 +4,7 @@
       %article
         %header
           %h2 My Queue
+        = form_tag update_queue_path
         %table.table
           %thead
             %tr
@@ -16,17 +17,18 @@
           %tbody
             - @queue_items.each do |item|
               %tr
+                = hidden_field_tag "queue_items[][id]", item.id
                 %td
-                  = item.position
+                  = text_field_tag "queue_items[][position]", item.position
                 %td
                   = link_to item.video_title
                 %td
                   = button_to "Play", nil, class: "btn btn-default"
                 %td
-                  = item.rating
+                  = select_tag "queue_items[][rating]",options_for_video_review(item.rating), include_blank: true
                 %td
                   = link_to item.category_name
                 %td
                   = link_to item, method: :delete do
                     %i.glyphicon.glyphicon-remove
-        = button_to "Update Instant Queue", nil, class: "btn btn-default"
+        = submit_tag "Update Instant Queue", class: "btn btn-default"   

@@ -10,6 +10,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
 gem 'bcrypt-ruby'
+gem 'annotate'
 group :development do
 	gem 'thin'
 	gem "better_errors"
