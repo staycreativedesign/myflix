@@ -10,8 +10,10 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
 gem 'bcrypt-ruby'
-gem 'annotate'
+
 group :development do
+	gem 'annotate'
+	gem 'capybara'
 	gem 'thin'
 	gem "better_errors"
 	gem "binding_of_caller"
