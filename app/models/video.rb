@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id              :integer          not null, primary key
+#  title           :string(255)
+#  description     :text
+#  small_cover_url :string(255)
+#  large_cover_url :string(255)
+#  category_id     :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class Video < ActiveRecord::Base
   belongs_to :category
   has_many :reviews

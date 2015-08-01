@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id          :integer          not null, primary key
+#  description :text
+#  video_id    :integer
+#  rating      :string(255)
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Review < ActiveRecord::Base
   belongs_to :video
   belongs_to :user
