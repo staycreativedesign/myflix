@@ -43,14 +43,15 @@ describe QueueItemsController do
           expect(flash[:error]).to be_present
         end
         it "does not change order"  do
-          expect(queue_item1.reload.position).to eq(3)
+          expect(queue_item1.reload.position).to eq(1)
         end
       end
       context "with queue items that do not belong to current_user" do
         it "does not change queue items" do 
+          video = Fabricate(:video)
           bob = Fabricate(:user)
-          queue_item3 = Fabricate(:queue_item, user: bob, position: 3)
-          queue_item4 = Fabricate(:queue_item, user: current_user, position: 4)
+          queue_item3 = Fabricate(:queue_item, user: bob, position: 3, video: video)
+          queue_item4 = Fabricate(:queue_item, user: current_user, position: 4, video: video)
           post :update_queue, queue_items:[{id: queue_item3.id, position: 4}, {id: queue_item4.id, position: 3}]
           expect(queue_item3.reload.position).to eq(3)
         end
@@ -84,9 +85,13 @@ describe QueueItemsController do
     end 
 
     describe "DELETE destroy" do
-      before { post :create, video_id: video1.id }
-      before { post :create, video_id: video2.id }
-      before { delete :destroy, id: QueueItem.first.id }
+      before do
+        post :create, video_id: video1.id
+        post :create, video_id: video2.id
+        delete :destroy, id: QueueItem.first.id
+      end
+      
+      
       
       it "the selected queue_item" do
         expect(QueueItem.count).to eq(1)

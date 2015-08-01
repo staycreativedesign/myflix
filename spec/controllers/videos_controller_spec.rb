@@ -3,6 +3,7 @@ require 'spec_helper'
 describe VideosController do
 	let(:video_1) { Fabricate(:video, title: 'Futurama')}
 	let(:video_2) { Fabricate(:video, title: 'Back to the Future')}
+	let(:gus)        { Fabricate(:user) }
 	
 	describe "GET show" do
 		it "sets @video for authenticated users" do
@@ -12,11 +13,10 @@ describe VideosController do
 		end
 		
 		it "sets the @reviews for authenticated users" do
-			session[:user_id] = Fabricate(:user).id
-			review1 = Fabricate(:review, video: video_1)
-			review2 = Fabricate(:review, video: video_1)
+			session[:user_id] = gus.id
+			review = Fabricate(:review, video: video_1)
 			get :show, id: video_1.id
-			expect(assigns(:reviews)).to match_array([review1,review2])
+			expect(assigns(:reviews)).to match_array([review])
 		end
 
 		it "redirects to sign_in for unauthenticated users" do

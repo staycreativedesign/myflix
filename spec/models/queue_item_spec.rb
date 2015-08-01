@@ -8,41 +8,37 @@ describe QueueItem do
 	it { should delegate_method(:title).to(:video).with_prefix(:video) }
 	it { should delegate_method(:category_name).to(:video) }
 
-	# let(:alice)      { Fabricate(:video) }
-	# let(:gus)        { Fabricate(:user) }
-	# let(:queue_item) { Fabricate(:queue_item, user: gus, video: alice) }
+	let(:alice)      { Fabricate(:video) }
+	let(:gus)        { Fabricate(:user) }
+	let(:queue_item) { Fabricate(:queue_item, user: gus, video: alice) }
 
-	# describe "#rating" do
-	# 	it "returns a rating from the review if review is present" do
-	# 		review = Fabricate(:review, user: gus, video: alice, rating: "4")
-	# 		expect(queue_item.rating).to eq("4")
-	# 	end
-	# 	it "returns nil if no rating" do
-	# 		expect(queue_item.rating).to eq(nil)
-	# 	end
-	# end
+	describe "#rating" do
+		it "returns a rating from the review if review is present" do
+			review = Fabricate(:review, user: gus, video: alice, rating: "4")
+			expect(queue_item.rating).to eq("4")
+		end
+		it "returns nil if no rating" do
+			expect(queue_item.rating).to eq(nil)
+		end
+	end
 
 	describe "=rating" do
 		it "changes the rating of the review is the review is present" do
-			video = Fabricate(:video)
-			user = Fabricate(:user)
-			review = Fabricate(:review, user: user, video: video, rating: "2")
-			queue_item = Fabricate(:queue_item, user: user, video: video)
+			review = Fabricate(:review , user: gus, video: alice, rating: "2")
+			queue_item.rating = "4"
 
-			queue_item.rating = nil
-
-			expect(Review.first.rating).to be_nil
-
+			expect(Review.first.rating).to eq("4")
 		end
 
 		it "clears the rating if review is present" do
 			review = Fabricate(:review , user: gus, video: alice, rating: "2")
 			
-			queue_item = Fabricate(:queue_item, user: gus, video: alice)
 			queue_item.rating = nil
-			
 			expect(Review.first.rating).to be_nil
 		end
-		it "creates a review with the rating if the review is not present"
+		it "creates a review with the rating if the review is not present" do
+			queue_item.rating = "2"
+			expect(Review.first.rating).to eq("2")
+		end
 	end
 end
