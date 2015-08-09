@@ -11,7 +11,7 @@ describe QueueItemsController do
     before { session[:user_id] = current_user.id }
 
     describe "GET index" do     
-      it "sets  to the queue items of the logged in user" do  
+      it "sets  the queue items of the logged in user" do  
         get :index
         expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
       end

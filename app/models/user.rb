@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :email, :full_name, :password, presence: true
 	validates_uniqueness_of :email
-			
 	has_many :queue_items, -> { order "position" }
 
 	def normalize_queue_positions
@@ -25,5 +24,9 @@ class User < ActiveRecord::Base
 
 	def new_queue_item_position
 	  queue_items.count + 1
+	end
+
+	def queued_video?(video)
+		queue_items.map(&:video).include?(video)
 	end
 end

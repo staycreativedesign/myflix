@@ -17,5 +17,5 @@ class Review < ActiveRecord::Base
   validates_presence_of :description
   validates_uniqueness_of :user_id, scope: :video_id
   delegate :full_name, :to => :user, :prefix => :user, :allow_nil => true
-
+  delegate :title, :to => :video, :prefix => :video
 end
