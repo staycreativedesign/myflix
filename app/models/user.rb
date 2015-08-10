@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
 	validates :email, :full_name, :password, presence: true
 	validates_uniqueness_of :email
 	has_many :queue_items, -> { order "position" }
-
+	has_many :reviews
+	
 	def normalize_queue_positions
 	  queue_items.each_with_index do |queue_item, index|
 	    queue_item.update_attributes(position: index+1)
