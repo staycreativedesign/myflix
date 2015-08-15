@@ -44,6 +44,13 @@
               )
 
   gus = User.create(full_name: "Gus", password: "red500", email: "pares101@aol.com")
+  bob = User.create(full_name: "Bob", password: "red500", email: "pares101@zzz.com")
+  jim = User.create(full_name: "Jim", password: "red500", email: "pares101@zzzr.com")
+
+  Relationship.create(leader: gus, follower: bob)
+  Relationship.create(leader: jim, follower: gus)
+  Relationship.create(leader: jim, follower: bob)
+
 
   Review.create(user: gus, video: southpark, rating: '5', description: "This is the description" )
   QueueItem.create(user: gus, video: southpark, position: 1)
